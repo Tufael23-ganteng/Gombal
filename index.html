@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gombalan Interaktif 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            color: #e91e63;
+            margin-bottom: 20px;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .question {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        button {
+            padding: 15px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-love {
+            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            color: white;
+            box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4);
+        }
+
+        .btn-love:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(233, 30, 99, 0.6);
+        }
+
+        .btn-no {
+            background: linear-gradient(45deg, #ff8e8e, #ff6b6b);
+            color: white;
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-no:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(255, 107, 107, 0.6);
+        }
+
+        .alert {
+            background: linear-gradient(45deg, #ffeaa7, #fab1a0);
+            color: #2d3436;
+            border: 2px solid #fdcb6e;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            font-weight: bold;
+            animation: pulse 0.5s ease-in-out;
+        }
+
+        .final-love {
+            background: linear-gradient(45deg, #00b894, #00cec9);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 20px;
+        }
+
+        .photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid rgba(255,255,255,0.8);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            margin: 20px auto;
+            display: block;
+            animation: bounceIn 1s ease-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); opacity: 0; }
+            60% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: #ff69b4;
+            animation: float 3s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="container" id="container">
+        <h1>💖 Cinta Tester 💖</h1>
+        
+        <!-- Pertanyaan 1 -->
+        <div id="q1">
+            <div class="question">
+                Sayang ga sama aku? 🥺💕
+            </div>
+            <div class="buttons">
+                <button class="btn-love" onclick="answerLove1(true)">Sayang 😍</button>
+                <button class="btn-no" onclick="answerLove1(false)">Ga Sayang 😭</button>
+            </div>
+        </div>
+
+        <!-- Pertanyaan 2 -->
+        <div id="q2" class="hidden">
+            <div class="question">
+                Sayang banget apa sayang aja? 😘❤️
+            </div>
+            <div class="buttons">
+                <button class="btn-love" onclick="answerLove2(true)">Sayang Banget! 💖</button>
+                <button class="btn-no" onclick="answerLove2(false)">Sayang Aja 😅</button>
+            </div>
+        </div>
+
+        <!-- Pertanyaan 3 -->
+        <div id="q3" class="hidden">
+            <div class="question">
+                Beneran sayang banget? 🤔💕
+            </div>
+            <div class="buttons">
+                <button class="btn-love" onclick="finalAnswer(true)">Ya beneran! 😍</button>
+                <button class="btn-no" onclick="finalAnswer(false)">Ga kok 😜</button>
+            </div>
+        </div>
+
+        <!-- Alert boxes -->
+        <div id="alert1" class="alert hidden"></div>
+        <div id="alert2" class="alert hidden"></div>
+        <div id="alert3" class="alert hidden"></div>
+
+        <!-- Final love screen -->
+        <div id="finalLove" class="final-love hidden">
+            <h2>YAYYY! 😍💖</h2>
+            <p>Aku juga sayang banget sama kamu! 💕</p>
+            <img id="myPhoto" class="photo" src="https://i.imgur.com/9680PMs.jpeg" alt="Foto Kamu">
+            <p style="margin-top: 20px; font-size: 18px;">Mwah mwah! 😘😘</p>
+        </div>
+    </div>
+
+    <script>
+        let currentState = 1;
+
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            for(let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.innerHTML = '💖';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    heartsContainer.appendChild(heart);
+                    
+                    setTimeout(() => heart.remove(), 5000);
+                }, i * 300);
+            }
+        }
+
+        function showAlert(message, callback) {
+            const alertDiv = document.getElementById(`alert${currentState}`);
+            alertDiv.textContent = message;
+            alertDiv.classList.remove('hidden');
+            
+            setTimeout(() => {
+                alertDiv.classList.add('hidden');
+                if(callback) callback();
+            }, 2000);
+        }
+
+        function answerLove1(isLove) {
+            if(isLove) {
+                // Lanjut ke pertanyaan 2
+                document.getElementById('q1').classList.add('hidden');
+                document.getElementById('q2').classList.remove('hidden');
+                currentState = 2;
+            } else {
+                // Alert harus sayang
+                showAlert('EHHH! Harus sayang dulu dong! 😤💔', () => {
+                    // Tetap di q1
+                });
+                createHearts();
+            }
+        }
+
+        function answerLove2(isLoveBanget) {
+            if(isLoveBanget) {
+                // Lanjut ke pertanyaan 3
+                document.getElementById('q2').classList.add('hidden');
+                document.getElementById('q3').classList.remove('hidden');
+                currentState = 3;
+            } else {
+                // Alert harus sayang banget
+                showAlert('Sayang aja doang? Harus sayang BANGET! 😠❤️', () => {
+                    // Kembali ke q2
+                });
+                createHearts();
+            }
+        }
+
+        function finalAnswer(isTrue) {
+            if(isTrue) {
+                // Menang! Tampilkan foto
+                document.getElementById('q3').classList.add('hidden');
+                document.getElementById('finalLove').classList.remove('hidden');
+                createHearts();
+                
+                // Ganti foto dengan foto kamu (upload foto kamu ke imgur/hosting)
+                // document.getElementById('myPhoto').src = 'URL_FOTO_KAMU';
+            } else {
+                // Alert jahat
+                showAlert('Kamu jahat banget sih! 😭💔 Ga sayang sama aku!', () => {
+                    // Kembali ke q3
+                });
+                createHearts();
+            }
+        }
+
+        // Auto create hearts
+        setInterval(createHearts, 8000);
+    </script>
+</body>
+</html>
